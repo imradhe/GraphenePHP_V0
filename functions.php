@@ -9,6 +9,7 @@ function home(){
       
 // Get URl
 function url(){
+    require('config.php');
     if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
          $url = "https://";   
     else  
@@ -18,8 +19,7 @@ function url(){
     
     // Append the requested resource location to the URL   
     $url.= $_SERVER['REQUEST_URI'];    
-    $url = substr(explode("?", $_SERVER['REQUEST_URI'])[0], 13);
-    $url = substr($url,1);
+    $url = ($config['APP_MODE']=='production')?substr(explode("?", $_SERVER['REQUEST_URI'])[0], 1):substr(explode("?", $_SERVER['REQUEST_URI'])[0], strlen($config['APP_TESTING_ROOT'])+2);
     require('config.php');
     return $config['APP_URL'].$url;  
 }

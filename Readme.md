@@ -10,7 +10,7 @@ git clone https://github.com/imradhe/GraphenePHP.git
 
 ## 🎈 Step 2: Copy config.php file
 ```bash
-cp config_example.php env.php
+cp config_example.php config.php
 ```
 
 ## 🚀 Step 3: Setup your app
