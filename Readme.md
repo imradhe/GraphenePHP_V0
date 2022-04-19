@@ -8,7 +8,7 @@ git clone https://github.com/imradhe/GraphenePHP.git
 ```
 
 
-## 🚀 Step 2: Copy config.php file
+## 🎈 Step 2: Copy config.php file
 ```bash
 cp config_example.php env.php
 ```
