@@ -19,7 +19,7 @@ function url(){
     
     // Append the requested resource location to the URL   
     $url.= $_SERVER['REQUEST_URI'];    
-    $url = ($config['APP_MODE']=='production')?substr(explode("?", $_SERVER['REQUEST_URI'])[0], 1):substr(explode("?", $_SERVER['REQUEST_URI'])[0], strlen($config['APP_TESTING_ROOT'])+2);
+    $url = (empty($config['APP_SLUG']))?substr(explode("?", $_SERVER['REQUEST_URI'])[0], 1):substr(explode("?", $_SERVER['REQUEST_URI'])[0], strlen($config['APP_SLUG'])+2);
     require('config.php');
     return $config['APP_URL'].$url;  
 }

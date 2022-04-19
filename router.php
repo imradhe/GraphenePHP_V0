@@ -31,8 +31,8 @@ class Router
    
     public function run()
     {   
-        require('config.php');
-       $this->request = ($config['APP_MODE'] == 'production')? substr(explode("?", $this->request)[0], 1): substr(explode("?", $this->request)[0], strlen($config['APP_TESTING_ROOT'])+2);
+       require('config.php');
+       $this->request = (empty($config['APP_SLUG']))? substr(explode("?", $this->request)[0], 1): substr(explode("?", $this->request)[0], strlen($config['APP_SLUG'])+2);
 
         if (empty(trim($this->request))) {
           require('views/index.php');
