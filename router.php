@@ -1,0 +1,78 @@
+<?php
+class Router
+{
+    public $request;
+    public $routes = [];
+    public $_GET = [];
+
+
+    public function __construct(array $request)
+    {
+        $this->request = $request['REQUEST_URI'];
+        $queries = explode("&",explode("?",$this->request)[1]);
+        foreach($queries as $query){
+            $_GET[explode("=", $query)[0]] = explode("=", $query)[1];
+        }
+    }
+
+
+    public function addRoute(string $uri, string $path) : void
+    {
+        $uri = explode('?',$uri)[0];
+        $this->routes[$uri] = $path;
+    }
+
+    
+    public function hasRoute(string $uri) : bool
+    {
+        return array_key_exists($uri, $this->routes);
+    }
+
+   
+    public function run()
+    {   
+        require('config.php');
+       $this->request = ($config['APP_MODE'] == 'production')? substr(explode("?", $this->request)[0], 1): substr(explode("?", $this->request)[0], strlen($config['APP_TESTING_ROOT'])+2);
+
+        if (empty(trim($this->request))) {
+          require('views/index.php');
+        }
+        
+        elseif($this->hasRoute($this->request)){
+                $routes = $this->routes;
+                require($routes[$this->request]);
+        }
+
+        elseif($this->request == "api/routes"){
+
+            session_start();
+            if($_GET['username'] == "admin@kautilyaeducation.com" && $_GET['password'] == "InspireKE@2022") {
+                header('Content-Type: application/json');
+                echo json_encode($this->routes);
+            }
+            else {
+                $res['status'] = '401';
+                $res['message'] = 'Authentication Error';
+                header('Content-Type: application/json');
+                http_response_code($res['status']);
+                echo json_encode($res);
+            }
+
+        }
+
+        else {
+
+            $uri = explode("?", $this->request)[0];
+            if($uri[strlen($uri)-1] == "/") {                
+                header("Location:".home().substr($uri, 0, strlen($uri)-1));
+            }else{
+                http_response_code(404);
+                require('views/errors/404.php');
+            }
+            
+        }
+
+    }
+
+}
+
