@@ -1,19 +1,19 @@
 <?php
 $config = array(
 
-        'APP_NAME'=>'GrapheneTest',
+        'APP_NAME'=>'GraphenePHP',
         'APP_MODE'=>'testing', //production/testing
-        'APP_TESTING_ROOT'=> 'GrapheneTest' , //only while testing
+        'APP_TESTING_ROOT'=> 'GraphenePHP' , //only while testing
         'APP_KEY'=>'',
         'APP_DEBUG'=>'true',
-        'APP_URL'=>'http://localhost/GrapheneTest/',
+        'APP_URL'=>'http://localhost/GraphenePHP/',
 
 
         'DB_CONNECTION'=>'mysql',
         'DB_HOST'=>'localhost',
         'DB_PORT'=>'3306',
-        'DB_DATABASE'=>'kautilyaeducation',
-        'DB_USERNAME'=>'root',
+        'DB_DATABASE'=>'',
+        'DB_USERNAME'=>'',
         'DB_PASSWORD'=>'',
 
         'MAIL_DRIVER'=>'smtp',

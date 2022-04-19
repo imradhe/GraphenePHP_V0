@@ -1,6 +1,3 @@
 User-agent: *
 Disallow: 
-Disallow: /api/login
-Disallow: /api/participants
-Disallow: /api/users
-Sitemap: https://staging.kautilyaeducation.com/sitemap.xml
+Sitemap: http://localhost/GraphenePHP/sitemap.xml
