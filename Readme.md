@@ -1,5 +1,5 @@
 A simple and light-weight PHP framework. 
-
+![GraphenePHP Home Screen](/assets/img/ss.png "GraphenePHP Home Screen")
 # Installation
 ## 📖 Step 1: Create Graphene Project
 
