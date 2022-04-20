@@ -17,7 +17,7 @@ class Router
 
 
     public function addRoute(string $uri, string $path) : void
-    {
+    { 
         $uri = explode('?',$uri)[0];
         $this->routes[$uri] = $path;
     }
@@ -41,23 +41,6 @@ class Router
         elseif($this->hasRoute($this->request)){
                 $routes = $this->routes;
                 require($routes[$this->request]);
-        }
-
-        elseif($this->request == "api/routes"){
-
-            session_start();
-            if($_GET['username'] == "admin@kautilyaeducation.com" && $_GET['password'] == "InspireKE@2022") {
-                header('Content-Type: application/json');
-                echo json_encode($this->routes);
-            }
-            else {
-                $res['status'] = '401';
-                $res['message'] = 'Authentication Error';
-                header('Content-Type: application/json');
-                http_response_code($res['status']);
-                echo json_encode($res);
-            }
-
         }
 
         else {

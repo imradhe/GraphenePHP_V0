@@ -1,0 +1,16 @@
+@font-face {
+    font-family: Graphene;
+    src: url(../fonts/Graphene.otf) format("truetype");
+}
+
+* {
+    font-family: Graphene !important;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}

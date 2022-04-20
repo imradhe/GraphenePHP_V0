@@ -1,7 +1,6 @@
-<div class="text-center footer">
-
-            <a rel="noopener" href="https://kautilyaeducation.com" target="_blank" style="text-decoration: none;">
-            <b>Sponsored By</b><br>
-            <img src="<?php echo home();?>assets/img/KE.png" style="max-height: 60px;" alt="Kautilya Education" class="img-fluid mb-3 p-2">
-          </a>
-          </div>
+<h4 class="footer mt-5">
+  Developed By
+  <a rel="noopener" href="https://github.com/imradhe" target="_blank" style="text-decoration: none;">
+    Radhe Shyam Salopanthula
+  </a>
+</h4>

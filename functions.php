@@ -1,9 +1,9 @@
 <?php
-//Get ENV
+
 // Home URL
 function home(){    
     require('config.php');
-    return $config['APP_URL'];
+    return (empty($config['APP_SLUG']))? $config['APP_URL'] : $config['APP_URL'].$config['APP_SLUG'];
 }
 // Get URL Parameters
       
@@ -21,6 +21,7 @@ function url(){
     $url.= $_SERVER['REQUEST_URI'];    
     $url = (empty($config['APP_SLUG']))?substr(explode("?", $_SERVER['REQUEST_URI'])[0], 1):substr(explode("?", $_SERVER['REQUEST_URI'])[0], strlen($config['APP_SLUG'])+2);
     require('config.php');
-    return $config['APP_URL'].$url;  
+    $url = home()."/".$url;  
+    return $url;
 }
 
