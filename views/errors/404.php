@@ -91,7 +91,7 @@
 
 <body>
     <div id="app" class="container text-center">
-        <img src="<?php echo home();?>assets/img/GraphenePHP.png" alt="GraphenePHP" class="img-fluid mb-4">
+        <img src="<?php echo home();?>assets/img/GraphenePHP-min.png" alt="GraphenePHP" class="img-fluid mb-4">
         <h1><b>404 Not Found</b></b></h1>
         <h4>The page you're looking for does not exist</h4>
         <a href="<?php echo home();?>" class="btn btn-graphene" rel="noopener">Go Back to Home</a>

@@ -1,7 +1,5 @@
 <?php
-header('Content-Type: application/json');
-header('x-powered-by: Kautilya Education');
-        
+header('Content-Type: application/json');        
 require('./db.php');
 
 

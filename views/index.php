@@ -3,11 +3,14 @@
 <?php include("partials/head.php") ?>
 <style>
     #app {
+        margin-top: 16vh;
         max-height: 100vh !important;
     }
-
+    img{
+        user-select: none !important;
+        pointer-events:none !important;
+    }
     #app img {
-        margin-top: 16vh;
         max-height: 40vh;
     }
 
@@ -34,8 +37,8 @@
 
 <body>
     <div id="app" class="container text-center">
-        <img src="<?php echo home();?>/assets/img/GraphenePHP.png" alt="GraphenePHP" class="img-fluid mb-4">
-        <h1>Welcome to your first <b>GraphenePHP</b> App</h1>
+        <img src="<?php echo home();?>assets/img/GraphenePHP.png" alt="GraphenePHP logo" title="GraphenePHP logo" class="img-fluid mb-4">
+        <h1>Welcome to your first <b>GraphenePHP</b> App</h1> 
         <a href="https://github.com/imradhe/graphenephp#readme" class="btn btn-graphene" rel="noopener"
             target="_blank">Documentation</a>
         <?php include('partials/footer.php') ;?>

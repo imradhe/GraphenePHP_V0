@@ -21,7 +21,7 @@ function url(){
     $url.= $_SERVER['REQUEST_URI'];    
     $url = (empty($config['APP_SLUG']))?substr(explode("?", $_SERVER['REQUEST_URI'])[0], 1):substr(explode("?", $_SERVER['REQUEST_URI'])[0], strlen($config['APP_SLUG'])+2);
     require('config.php');
-    $url = home()."/".$url;  
+    $url = (empty($url))? home():home()."/".$url;  
     return $url;
 }
 

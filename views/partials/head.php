@@ -8,7 +8,7 @@
     <meta name="robots" content="follow"/>
     <link rel="canonical" href="<?php echo url();?>" />
 
-    <link rel=icon sizes=192x192 href="<?php echo $config['APP_ICON']; ?>" />
+    <link rel=icon sizes=192x192 href="<?php echo home().$config['APP_ICON']; ?>" />
     <meta name="theme-color" content="<?php echo $config['APP_THEME_COLOR']; ?>" />
 
      <!-- OPEN GRAPH -->
@@ -17,13 +17,13 @@
     <meta property="og:url" content="<?php echo home(); ?>" />
     
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:creator" content="<?php echo $config['APP_TWITTER_CREATOR']; ?>">
+    <meta name="twitter:creator" content="<?php echo home().$config['APP_TWITTER_CREATOR']; ?>">
 
-    <meta property="og:image:secure_url" itemprop="image" content="<?php echo $config['APP_OG_ICON']; ?>"/>
-    <meta property="og:image" itemprop="image" content="<?php echo $config['APP_OG_ICON']; ?>"/>
+    <meta property="og:image:secure_url" itemprop="image" content="<?php echo home().$config['APP_OG_ICON']; ?>"/>
+    <meta property="og:image" itemprop="image" content="<?php echo home().$config['APP_OG_ICON']; ?>"/>
 
-    <meta property="og:image:secure_url" itemprop="image" content="<?php echo $config['APP_OG_ICON_MOBILE']; ?>"/>
-    <meta property="og:image" itemprop="image" content="<?php echo $config['APP_OG_ICON_MOBILE']; ?>"/>
+    <meta property="og:image:secure_url" itemprop="image" content="<?php echo home().$config['APP_OG_ICON_MOBILE']; ?>"/>
+    <meta property="og:image" itemprop="image" content="<?php echo home().$config['APP_OG_ICON_MOBILE']; ?>"/>
     <meta property="og:description" content="<?php echo $config['APP_DESC']; ?>" />
     <meta property="og:site_name" content="<?php echo $config['APP_NAME']; ?>"/>
     
