@@ -2,8 +2,6 @@
 header('Content-Type: application/json');        
 require('./db.php');
 
-
-
 $data = mysqli_fetch_assoc(mysqli_query($con,"SELECT * FROM `students`"));
 
 if(!empty($data)){
@@ -18,4 +16,3 @@ if(!empty($data)){
 
 http_response_code($res['status']);
 echo json_encode($res);
-
