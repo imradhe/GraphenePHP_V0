@@ -10,6 +10,7 @@ require('router.php');
 
         $router->addRoute('test','views/test.php');
         
+        $router->addRoute('portfolio','views/portfolio.php');
         
             
         
