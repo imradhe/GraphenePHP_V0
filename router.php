@@ -5,7 +5,6 @@ class Router
     public $routes = [];
     public $_GET = [];
 
-
     public function __construct(array $request)
     {
         $this->request = $request['REQUEST_URI'];
@@ -44,7 +43,6 @@ class Router
         }
 
         else {
-
             $uri = explode("?", $this->request)[0];
             if($uri[strlen($uri)-1] == "/") {                
                 header("Location:".home().substr($uri, 0, strlen($uri)-1));
@@ -58,4 +56,3 @@ class Router
     }
 
 }
-

@@ -47,8 +47,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
     <!-- Icons -->
-    <script src="https://kit.fontawesome.com/30fd2510e8.js"></script>
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">    
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="<?php echo home().'assets/css/app.css';?>">
