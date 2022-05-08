@@ -6,7 +6,6 @@ require('router.php');
 
         $router->addRoute('', 'views/index.php');
         
-        $router->addRoute('hello','views/hello.php');
 
         $router->addRoute('test','views/test.php');
         
