@@ -8,12 +8,6 @@ require('router.php');
         
 
         $router->addRoute('test','views/test.php');
-        
-        $router->addRoute('portfolio','views/portfolio.php');
-
-        $router->addRoute('lyrics','views/lyrics.php');
-        $router->addRoute('player','views/player.php');
-        
             
         
             
