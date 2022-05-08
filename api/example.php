@@ -1,8 +1,9 @@
-<?php
-header('Content-Type: application/json');        
+<?php    
 require('./db.php');
 
-$data = mysqli_fetch_assoc(mysqli_query($con,"SELECT * FROM `students`"));
+
+$url = 'https://jsonplaceholder.typicode.com/posts';
+$data = json_decode(file_get_contents($url));
 
 if(!empty($data)){
     $res['status'] = '200';
@@ -15,4 +16,5 @@ if(!empty($data)){
 }
 
 http_response_code($res['status']);
+header('Content-Type: application/json');    
 echo json_encode($res);
