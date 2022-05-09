@@ -20,6 +20,4 @@ Modify `config.php` file and start your server to run the app.
 
 If you want to know the status and get updates you can follow me on [Instagram @imraadhe](https://instagram.com/imraadhe)
 
-<script>
-window.location.href = "https://imradhe.netlify.app"  
-</script>
+
