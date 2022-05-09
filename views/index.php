@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include("partials/head.php") ?>
+<?php include("views/partials/head.php") ?>
 <style>
     #app {
         margin-top: 16vh;
@@ -37,11 +37,11 @@
 
 <body>
     <div id="app" class="container text-center">
-        <img src="<?php echo home();?>assets/img/GraphenePHP.png" alt="GraphenePHP logo" title="GraphenePHP logo" class="img-fluid mb-4">
+        <img src="<?php assets("img/GraphenePHP.png");?>" alt="GraphenePHP logo" title="GraphenePHP logo" class="img-fluid mb-4">
         <h1>Welcome to your first <b>GraphenePHP</b> App</h1> 
         <a href="https://github.com/imradhe/graphenephp#readme" class="btn btn-graphene" rel="noopener"
             target="_blank">Documentation</a>
-        <?php include('partials/footer.php') ;?>
+        <?php include('views/partials/footer.php') ;?>
     </div>
 </body>
 

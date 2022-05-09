@@ -36,11 +36,11 @@
 
     
     <!-- Bootstrap core CSS -->
-    <link href="<?php echo home();?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="<?php echo home();?>assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <link href="<?php assets("bootstrap/css/bootstrap.min.css");?>" rel="stylesheet">
+    <script src="<?php assets("bootstrap/js/bootstrap.bundle.min.js");?>"></script>
 
     <!-- Jquery -->
-    <script src="<?php echo home();?>assets/jquery/jquery.min.js"></script>
+    <script src="<?php assets("jquery/jquery.min.js");?>"></script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,7 +50,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">    
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="<?php echo home().'assets/css/app.css';?>">
+    <link rel="stylesheet" href="<?php assets("css/app.css");?>">
 
     <title><?php echo $config['APP_TITLE']; ?></title>
 </head>

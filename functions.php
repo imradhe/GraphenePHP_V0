@@ -165,3 +165,7 @@ function getDevice(){
       'ip' => getIP()
     );
   } 
+
+function assets($path){
+  echo "assets/".$path;
+}

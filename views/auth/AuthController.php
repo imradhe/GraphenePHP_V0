@@ -79,5 +79,3 @@ class Auth
 }
 
 
-
-$authenticate = new Auth();
