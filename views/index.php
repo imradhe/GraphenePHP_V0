@@ -39,7 +39,7 @@
     <div id="app" class="container text-center">
         <img src="<?php assets("img/GraphenePHP.png");?>" alt="GraphenePHP logo" title="GraphenePHP logo" class="img-fluid mb-4">
         <h1>Welcome to your first <b>GraphenePHP</b> App</h1> 
-        <a href="https://github.com/imradhe/graphenephp#readme" class="btn btn-graphene" rel="noopener"
+        <a href="https://github.com/imradhe/GraphenePHP/wiki/GraphenePHP" class="btn btn-graphene" rel="noopener"
             target="_blank">Documentation</a>
         <p><?php if($user = getSession()) echo $user['email']." Logged In"; else "Logged Out"; ?></p>
         <?php include('views/partials/footer.php') ;?>
