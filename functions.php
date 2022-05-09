@@ -3,7 +3,7 @@
 // Home URL
 function home(){    
     require('config.php');
-    return (empty($config['APP_SLUG']))? $config['APP_URL'] : $config['APP_URL'].$config['APP_SLUG'];
+    return (empty($config['APP_SLUG']))? $config['APP_URL'] : $config['APP_URL'].$config['APP_SLUG']."/";
 }
 // Get URL Parameters
       
