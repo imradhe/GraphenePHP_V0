@@ -192,6 +192,11 @@ function getUser(){
   else return false;
 }
 
+function locked(){
+  require("views/auth/AuthController.php");
+  $auth = new Auth();
+}
+
 
 function assets($path){
   echo "assets/".$path;

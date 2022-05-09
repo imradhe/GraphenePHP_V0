@@ -1,6 +1,5 @@
 <?php
-    require("views/auth/AuthController.php");
-    $auth = new Auth();
+locked();
 ?>
 <audio class="player" src="https://www.codepunker.com/resources/audio-sync-with-text/10bears.mp3" controls></audio>
 
