@@ -1,3 +1,7 @@
+<?php
+    require("views/auth/AuthController.php");
+    $auth = new Auth();
+?>
 <audio class="player" src="https://www.codepunker.com/resources/audio-sync-with-text/10bears.mp3" controls></audio>
 
 <!-- <video class="player" src="http://caiman.graodemilho.com.br/wp-content/uploads/2019/03/Video_SPLASH_v3_leve.mp4" controls></video> -->

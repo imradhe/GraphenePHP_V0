@@ -8,13 +8,13 @@ require('router.php');
         
 
         $router->addRoute('test','views/test.php');
+        $router->addRoute('lyrics','views/lyrics.php');
             
         
         /* Auth Routes */
             
         $router->addRoute('login','views/auth/login.php');
 
-        $router->addRoute('auth','views/auth/AuthController.php');
 
         /*API Routes*/  
         $router->addRoute('api/example','api/example.php');

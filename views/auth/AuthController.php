@@ -1,5 +1,4 @@
 <?php
-error_reporting(1);
 class Auth
 {
     private $email;
@@ -16,15 +15,12 @@ class Auth
         require('db.php');
 
         $this->db = new mysqli($config['DB_HOST'],$config['DB_USERNAME'], $config['DB_PASSWORD'], $config['DB_DATABASE']);
+        
         if($this->checkSession()){
 
             if($this->currentLog['ip'] != getIP()) 
             
-            header("Location:".home()."login?back=".url());
-
-            else{
-                echo "Logged In";
-            }     
+            header("Location:".home()."login?back=".url()); 
 
         }
         
@@ -69,13 +65,12 @@ class Auth
 
             if($insertLog){
                 if(!empty($_GET['back'])) header("Location:".$_GET['back']);
-                else header("Location:".home()."auth");
+                else header("Location:".home());
             }
             else{
                 header("Location:".home()."login");
             }
         }
     }
-}
-
+} 
 

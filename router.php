@@ -34,12 +34,12 @@ class Router
        $this->request = (empty($config['APP_SLUG']))? substr(explode("?", $this->request)[0], 1): substr(explode("?", $this->request)[0], strlen($config['APP_SLUG'])+2);
 
         if (empty(trim($this->request))) {
-          require('views/index.php');
+          include('views/index.php');
         }
         
         elseif($this->hasRoute($this->request)){
                 $routes = $this->routes;
-                require($routes[$this->request]);
+                include($routes[$this->request]);
         }
 
         else {
@@ -48,7 +48,7 @@ class Router
                 header("Location:".home().substr($uri, 0, strlen($uri)-1));
             }else{
                 http_response_code(404);
-                require('views/errors/404.php');
+                include('views/errors/404.php');
             }
             
         }

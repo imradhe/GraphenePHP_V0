@@ -41,6 +41,7 @@
         <h1>Welcome to your first <b>GraphenePHP</b> App</h1> 
         <a href="https://github.com/imradhe/graphenephp#readme" class="btn btn-graphene" rel="noopener"
             target="_blank">Documentation</a>
+        <p><?php if($user = getSession()) echo $user['email']." Logged In"; else "Logged Out"; ?></p>
         <?php include('views/partials/footer.php') ;?>
     </div>
 </body>
