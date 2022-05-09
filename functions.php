@@ -162,6 +162,6 @@ function getDevice(){
       'version'   => $version,
       'platform'  => $platform,
       'pattern'    => $pattern,
-      'ip' => $ip
+      'ip' => getIP()
     );
   } 

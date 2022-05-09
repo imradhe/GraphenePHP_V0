@@ -3,8 +3,6 @@ $cookie_name = "auth";
 $cookie_value = md5("John Doe");
 
 
-print_r(getDevice());
-
 
 /*
 Users Table:
