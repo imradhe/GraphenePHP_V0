@@ -53,30 +53,35 @@ class Auth
         $loginQuery = mysqli_fetch_assoc($this->db->query("SELECT * from users where email='$this->email'"));
 
 
-        if($loginQuery['password'] == md5($this->password)){
+        if($loginQuery){
+            if($loginQuery['password'] == md5($this->password)){
 
 
-            $this->loginID = md5($this->email.$this->password.time());
-
-            setcookie("auth", $this->loginID, time() + (86400 * 365), "/");
-
-            $this->ip = getDevice()['ip'];
-            $this->os = getDevice()['os'];
-            $this->browser = getDevice()['browser'];
-
-
-            $insertLog = $this->db->query("INSERT INTO logs (`loginID`, `email`, `ip`, `browser`, `os`) VALUES ('$this->loginID','$this->email','$this->ip','$this->browser','$this->os')");
-
-            if($insertLog){
-                if(!empty($_GET['back'])) header("Location:".$_GET['back']);
-                else header("Location:".home());
+                $this->loginID = md5($this->email.$this->password.time());
+    
+                setcookie("auth", $this->loginID, time() + (86400 * 365), "/");
+    
+                $this->ip = getDevice()['ip'];
+                $this->os = getDevice()['os'];
+                $this->browser = getDevice()['browser'];
+    
+    
+                $insertLog = $this->db->query("INSERT INTO logs (`loginID`, `email`, `ip`, `browser`, `os`) VALUES ('$this->loginID','$this->email','$this->ip','$this->browser','$this->os')");
+    
+                if($insertLog){
+                    if(!empty($_GET['back'])) header("Location:".$_GET['back']);
+                    else header("Location:".home());
+                }
+                else{
+                    $this->errors = "Internal Server Error";
+                }
             }
             else{
-                //$this->errors = "Password Doesn't Match";
+                $this->errors = "Password Doesn't Match";
             }
         }
         else{
-            $this->errors = "Password Doesn't Match";
+            $this->errors = "Internal Server Error";
         }
     }
 } 
