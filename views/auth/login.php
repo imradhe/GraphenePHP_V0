@@ -1,7 +1,7 @@
 <?php
-    if(isset($_POST['btn-login'])){
       require("views/auth/AuthController.php");
       $auth = new Auth();
+    if(isset($_POST['btn-login'])){
       $user = $auth->login($_POST['email'],$_POST['password']);
     }else{
       if(getSession()){
@@ -75,7 +75,11 @@ body {
   <body class="text-center">
     <form method="POST" name="Login" class="form-signin">
   <h1 class="h3 mb-3 font-weight-normal">Log In </h1>
-  
+  <?php if(!empty($auth->errors)){ ?>
+    <div class="alert alert-danger" role="alert">
+      <?php echo $auth->errors;?>
+    </div>
+  <?php }?>
   <div class="mb-3">
     <input name="email" type="email" id="email" class="form-control" placeholder="Email" required autofocus>
     <strong id="emailMsg" class="text-danger errorMsg my-2 fw-bolder"></strong>

@@ -9,7 +9,7 @@ class Auth
     protected $ip;
     protected $browser;
     protected $os;
-    protected $errors;
+    public $errors;
 
     public function __construct(){
 
@@ -18,7 +18,7 @@ class Auth
         $this->db = new mysqli($config['DB_HOST'],$config['DB_USERNAME'], $config['DB_PASSWORD'], $config['DB_DATABASE']);
 
         $this->errors = "";
-        
+
         if($this->checkSession()){
 
             if($this->currentLog['ip'] != getIP()) 
@@ -72,9 +72,11 @@ class Auth
                 else header("Location:".home());
             }
             else{
-                $this->errors = "Password Doesn't Match";
-                return $this->errors;
+                //$this->errors = "Password Doesn't Match";
             }
+        }
+        else{
+            $this->errors = "Password Doesn't Match";
         }
     }
 } 
