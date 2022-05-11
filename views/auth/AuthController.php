@@ -1,20 +1,24 @@
 <?php
 class Auth
 {
-    private $email;
-    private $password;
-    private $con;
-    private $loginID;
-    private $currentLog;
-    private $ip;
-    private $browser;
-    private $os;
+    protected $email;
+    protected $password;
+    protected $con;
+    protected $loginID;
+    protected $currentLog;
+    protected $ip;
+    protected $browser;
+    protected $os;
+    protected $errors;
 
     public function __construct(){
 
         require('db.php');
 
         $this->db = new mysqli($config['DB_HOST'],$config['DB_USERNAME'], $config['DB_PASSWORD'], $config['DB_DATABASE']);
+
+        $this->errors = "";
+        
         if($this->checkSession()){
 
             if($this->currentLog['ip'] != getIP()) 
@@ -45,6 +49,7 @@ class Auth
         $this->email = trim(mysqli_real_escape_string($this->db, $email));
         $this->password = mysqli_real_escape_string($this->db, $password);
 
+
         $loginQuery = mysqli_fetch_assoc($this->db->query("SELECT * from users where email='$this->email'"));
 
 
@@ -67,8 +72,8 @@ class Auth
                 else header("Location:".home());
             }
             else{
-                echo "Login Failed";
-                //header("Location:".home()."login");
+                $this->errors = "Password Doesn't Match";
+                return $this->errors;
             }
         }
     }

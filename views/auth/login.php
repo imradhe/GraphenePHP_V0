@@ -75,6 +75,7 @@ body {
   <body class="text-center">
     <form method="POST" name="Login" class="form-signin">
   <h1 class="h3 mb-3 font-weight-normal">Log In </h1>
+  
   <div class="mb-3">
     <input name="email" type="email" id="email" class="form-control" placeholder="Email" required autofocus>
     <strong id="emailMsg" class="text-danger errorMsg my-2 fw-bolder"></strong>
