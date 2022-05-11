@@ -197,6 +197,9 @@ function locked(){
   $auth = new Auth();
 }
 
+function redirectIfLocked(){
+  if(url() != home()."login") header("Location:".home()."login?back=".url());
+}
 
 function assets($path){
   echo "assets/".$path;

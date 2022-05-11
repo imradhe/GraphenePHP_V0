@@ -15,16 +15,15 @@ class Auth
         require('db.php');
 
         $this->db = new mysqli($config['DB_HOST'],$config['DB_USERNAME'], $config['DB_PASSWORD'], $config['DB_DATABASE']);
-        
         if($this->checkSession()){
 
             if($this->currentLog['ip'] != getIP()) 
             
-            header("Location:".home()."login?back=".url()); 
+            redirectIfLocked(); 
 
         }
         
-        else header("Location:".home()."login?back=".url());
+        else redirectIfLocked();
     }
     public function checkSession(){
         $this->loginID = $_COOKIE['auth'];
@@ -68,7 +67,8 @@ class Auth
                 else header("Location:".home());
             }
             else{
-                header("Location:".home()."login");
+                echo "Login Failed";
+                //header("Location:".home()."login");
             }
         }
     }
