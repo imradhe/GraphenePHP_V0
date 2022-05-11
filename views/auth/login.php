@@ -1,9 +1,12 @@
 <?php
-    redirectIfLocked();
     if(isset($_POST['btn-login'])){
       require("views/auth/AuthController.php");
       $auth = new Auth();
       $user = $auth->login($_POST['email'],$_POST['password']);
+    }else{
+      if(getSession()){
+        header("Location:".home());
+      }
     }
 ?>
 <!doctype html>
