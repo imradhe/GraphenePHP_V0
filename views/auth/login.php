@@ -4,9 +4,7 @@
     if(isset($_POST['btn-login'])){
       $user = $auth->login($_POST['email'],$_POST['password']);
     }else{
-      if(getSession()){
-        header("Location:".home());
-      }
+      if(isset($_COOKIE['auth'])) header("Location:".home());
     }
 ?>
 <!doctype html>

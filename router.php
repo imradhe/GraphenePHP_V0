@@ -17,7 +17,8 @@ class Router
 
     public function addRoute(string $uri, string $path) : void
     { 
-        $uri = explode('?',$uri)[0];
+       
+  $data = json_decode($data, true); $uri = explode('?',$uri)[0];
         $this->routes[$uri] = $path;
     }
 
