@@ -15,6 +15,7 @@ require('router.php');
             
         $router->addRoute('login','views/auth/login.php');
 
+        $router->addRoute('logout','views/auth/logout.php');
 
         /*API Routes*/  
         $router->addRoute('api/example','api/example.php');
