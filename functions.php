@@ -169,7 +169,7 @@ function getDevice(){
 function getSession(){
   $loginID = $_COOKIE['auth'];
 
-  require_once("db.php");
+  require("db.php");
   $query = mysqli_fetch_assoc(mysqli_query($con,"SELECT * from logs where loginID='$loginID' and loggedout=0"));
 
   if($query){
@@ -181,7 +181,7 @@ function getSession(){
 function getUser(){
   $loginID = $_COOKIE['auth'];
 
-  require_once("db.php");
+  require("db.php");
   $query = mysqli_fetch_assoc(mysqli_query($con,"SELECT * from logs where loginID='$loginID' and loggedout=0"));
 
   if($query){
