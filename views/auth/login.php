@@ -4,7 +4,7 @@
     if(isset($_POST['btn-login'])){
       $user = $auth->login($_POST['email'],$_POST['password']);
     }else{
-      if(isset($_COOKIE['auth'])) header("Location:".home());
+      if(getSession()) header("Location:".home());
     }
 ?>
 <!doctype html>
@@ -73,6 +73,11 @@ body {
   <body class="text-center">
     <form method="POST" name="Login" class="form-signin">
   <h1 class="h3 mb-3 font-weight-normal">Log In </h1>
+  <?php if($_GET['loggedout']){ ?>
+    <div class="alert alert-success" role="alert">
+      <?php echo "Logged Out Successfully";?>
+    </div>
+  <?php }?>
   <?php if(!empty($auth->errors)){ ?>
     <div class="alert alert-danger" role="alert">
       <?php echo $auth->errors;?>
