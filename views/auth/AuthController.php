@@ -43,6 +43,7 @@ class Auth
 
     }
     
+
     public function login($email, $password){
 
 
@@ -82,6 +83,17 @@ class Auth
         }
         else{
             $this->errors = "Internal Server Error";
+        }
+    }
+
+    public function logout(){
+        $loginID = getSession()['loginID'];
+        $time = date_create()->format('Y-m-d H:i:s');
+        $updateLog = $this->db->query("UPDATE logs SET loggedout = 1, loggedoutat = current_timestamp()	 WHERE loginID = '$loginID'");
+        if($updateLog){
+            setcookie("auth", "", time()-(60*60*24*7),"/");
+            unset($_COOKIE["auth"]);
+            header("Location:".home()."login?loggedout=true");
         }
     }
 } 
