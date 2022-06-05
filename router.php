@@ -2,23 +2,23 @@
 class Router
 {
     public $request;
+    public $queries;
     public $routes = [];
-    public $_GET = [];
 
     public function __construct(array $request)
     {
         $this->request = $request['REQUEST_URI'];
         $queries = explode("&",explode("?",$this->request)[1]);
-        foreach($queries as $query){
-            $_GET[explode("=", $query)[0]] = explode("=", $query)[1];
-        }
+        $this->queries = explode("?",$this->request)[1];
+        // foreach($queries as $query){
+        //     $_GET[explode("=", $query)[0]] = explode("=", $query)[1];
+        // }
     }
 
 
     public function addRoute(string $uri, string $path) : void
     { 
-       
-  $data = json_decode($data, true); $uri = explode('?',$uri)[0];
+        $uri = explode('?',$uri)[0];
         $this->routes[$uri] = $path;
     }
 
@@ -49,6 +49,7 @@ class Router
                 header("Location:".home().substr($uri, 0, strlen($uri)-1));
             }else{
                 http_response_code(404);
+                header("HTTP/1.0 404 Page Not Found");
                 include('views/errors/404.php');
             }
             
