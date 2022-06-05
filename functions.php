@@ -32,8 +32,8 @@ function getOS() {
 
 
     $os_array     = array(
-                          '/windows/i'      =>  'Windows 10',
-                          '/Windows NT 10/i'      =>  'Windows 10',
+                          '/windows/i'      =>  'Windows',
+                          '/Windows NT 11/i'      =>  'Windows 11',
                           '/Windows NT 10/i'      =>  'Windows 10',
                           '/windows nt 6.3/i'     =>  'Windows 8.1',
                           '/windows nt 6.2/i'     =>  'Windows 8',
@@ -161,7 +161,6 @@ function getDevice(){
       'os' => getOS(),
       'version'   => $version,
       'platform'  => $platform,
-      'pattern'    => $pattern,
       'ip' => getIP()
     );
   } 
@@ -203,4 +202,69 @@ function redirectIfLocked(){
 
 function assets($path){
   echo "assets/".$path;
+}
+
+
+
+function getAuthorizationHeader(){
+  $headers = null;
+  if (isset($_SERVER['Authorization'])) {
+      $headers = trim($_SERVER["Authorization"]);
+  }
+  else if (isset($_SERVER['HTTP_AUTHORIZATION'])) { //Nginx or fast CGI
+      $headers = trim($_SERVER["HTTP_AUTHORIZATION"]);
+  } elseif (function_exists('apache_request_headers')) {
+      $requestHeaders = apache_request_headers();
+      // Server-side fix for bug in old Android versions (a nice side-effect of this fix means we don't care about capitalization for Authorization)
+      $requestHeaders = array_combine(array_map('ucwords', array_keys($requestHeaders)), array_values($requestHeaders));
+      //print_r($requestHeaders);
+      if (isset($requestHeaders['Authorization'])) {
+          $headers = trim($requestHeaders['Authorization']);
+      }
+  }
+  return $headers;
+}
+
+/**
+* get access token from header
+* */
+function getBearerToken() {
+  $headers = getAuthorizationHeader();
+  // HEADER: Get the access token from the header
+  if (!empty($headers)) {
+      if (preg_match('/Bearer\s(\S+)/', $headers, $matches)) {
+          return $matches[1];
+      }
+  }
+  return null;
+}
+function getAPIToken() {
+  $headers = null;
+  if (isset($_SERVER['token'])) {
+      $headers = trim($_SERVER["token"]);
+  }
+  elseif (isset($_SERVER['HTTP_TOKEN'])) {
+      $headers = trim($_SERVER["HTTP_TOKEN"]);
+  }
+  elseif (isset($_SERVER['HTTP_ACCEPT'])) {
+      $headers = trim($_SERVER["HTTP_ACCEPT"]);
+  }
+  elseif (function_exists('apache_request_headers')) {
+      $requestHeaders = apache_request_headers();
+      // Server-side fix for bug in old Android versions (a nice side-effect of this fix means we don't care about capitalization for Authorization)
+      $requestHeaders = array_combine(array_map('ucwords', array_keys($requestHeaders)), array_values($requestHeaders));
+      //print_r($requestHeaders);
+      if (isset($requestHeaders['token'])) {
+          $headers = trim($requestHeaders['token']);
+      }
+  }
+  return $headers;
+}
+
+function sha256($string) {
+  return hash('sha256', $string);
+}
+
+function sha512($string) {
+  return hash('sha512', $string);
 }
