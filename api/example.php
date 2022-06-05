@@ -1,7 +1,4 @@
 <?php    
-require('./db.php');
-
-
 $url = 'https://jsonplaceholder.typicode.com/posts';
 $data = json_decode(file_get_contents($url));
 
