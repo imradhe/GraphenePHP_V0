@@ -32,6 +32,7 @@ class Auth
         else redirectIfLocked();
     }
 
+
     // Check the session validity
     public function checkSession(){
         $this->loginID = $_COOKIE['auth'];
@@ -40,7 +41,7 @@ class Auth
 
         if($query){
             $this->currentLog = mysqli_fetch_assoc($this->db->query("SELECT * from logs where loginID='$this->loginID' and loggedout=0"));
-            return true;
+            return $this->currentLog;
         }
 
         else return false;
@@ -88,7 +89,7 @@ class Auth
             }
         }
         else{
-            $this->errors = "Internal Server Error";
+            $this->errors = "User Not Found";
         }
     }
 
