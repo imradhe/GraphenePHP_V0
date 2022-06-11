@@ -1,49 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include("views/partials/head.php") ?>
-<style>
-    #app {
-        margin-top: 16vh;
-        max-height: 100vh !important;
-    }
-    img{
-        user-select: none !important;
-        pointer-events:none !important;
-    }
-    #app img {
-        max-height: 40vh;
-    }
 
-    .btn-graphene {
-        font-weight: bolder;
-        letter-spacing: 1px;
-        padding: 8px 28px;
-        border-radius: 50px;
-        transition: 0.5s;
-        margin: 10px;
-        background-color: rgba(173, 220, 203);
-        color: #000;
-        border: 2px solid #ADDCCB;
-    }
-
-    .btn-graphene:hover,
-    .btn-graphene:active,
-    .btn-graphene:focus {
-        background-color: rgba(173, 220, 203, .3);
-        border: 2px solid #ADDCCB;
-        color: #000;
-    }
-</style>
 
 <body>
+
+    <?php require('views/partials/nav.php');?>
+
     <div id="app" class="container text-center">
-        <img src="<?php assets("img/GraphenePHP.png");?>" alt="GraphenePHP logo" title="GraphenePHP logo" class="img-fluid mb-4">
-        <h1>Welcome to your first <b>GraphenePHP</b> App</h1> 
-        <a href="https://github.com/imradhe/GraphenePHP/wiki/GraphenePHP" class="btn btn-graphene" rel="noopener"
-            target="_blank">Documentation</a>
+
+    
+        <img src="<?php assets("img/MotoBase.png");?>" alt="MotoBase logo" title="MotoBase logo" class="img-fluid mb-4">
+        <h1>Car Rental at <b>Ease.</b></h1> 
+        <a href="<?php echo route('search');?>" id="search" class="btn btn-motobase" rel="noopener">Rent A Car</a>
+        <a href="<?php echo route('register/host');?>" id="registerHost" class="btn btn-motobase" rel="noopener">Become A Host</a>
         <p><?php if($user = getSession()) echo $user['email']." Logged In"; else "Logged Out"; ?></p>
         <?php include('views/partials/footer.php') ;?>
     </div>
+
+
+    <script>
+        var search = document.querySelector('#search')
+        var registerHost = document.querySelector('#registerHost')
+        <?php
+            if(getUser()['role'] == 'customer'){
+                ?>
+                registerHost.innerText = 'Profile'
+                registerHost.href = '<?php echo route("profile");?>'
+                <?php
+            }elseif(getUser()['role'] == 'host'){
+                ?>
+                search.style.display = 'none'
+                registerHost.innerText = 'Profile'
+                registerHost.href = '<?php echo route("profile");?>'
+                <?php
+            }
+        ?>
+    </script>
 </body>
 
 </html>

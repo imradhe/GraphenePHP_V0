@@ -1,16 +1,25 @@
 <?php
-      controller("Auth");
-      $auth = new Auth();
-    if(isset($_POST['btn-login'])){
-      $user = $auth->login($_POST['email'],$_POST['password']);
+
+    require('db.php');
+    $customers = mysqli_query($con,"SELECT * FROM `users`");
+
+
+    foreach ($customers as $key => $value) {
+        $emails[$key] = $value;
+    }
+
+    if(isset($_POST['btn-register'])){
+        controller("User");
+        $user = new User();
+        $register = $user->register($_POST['name'], $_POST['email'], $_POST['phone'],$_POST['password'], 'customer');
     }else{
-      if(getSession()) header("Location:".home());
+      if(getUser()['role'] == 'customer') header("Location:".home());
     }
 ?>
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Login | MotoBase</title>
+    <title>User Registration | MotoBase</title>
     <style>
       html,
 body {
@@ -55,7 +64,7 @@ body {
 #eye{
   cursor: pointer;
 }
-    </style>
+</style>
   </head>
   
   <?php include("views/partials/head.php"); ?>
@@ -65,46 +74,61 @@ body {
   <div class="logo mt-5 pt-5">
     <a href="<?php echo home()?>"><img src="<?php echo home().$config['APP_LOGO'];?>" alt="MotoBase" class="img-fluid"></a>
   </div>
-  <form method="POST" name="Login" class="form-signin">
-  <h2 class="mb-3 fw-bolder">Log In</h1>
-  <?php if($_GET['loggedout']){ ?>
-    <div class="alert alert-success" role="alert">
-      <?php echo "Logged Out Successfully";?>
-    </div>
-  <?php }?>
-  <?php if(!empty($auth->errors)){ ?>
-    <div class="alert alert-danger" role="alert">
-      <?php echo $auth->errors;?>
-    </div>
-  <?php }?>
+  <form method="POST" name="Register" class="form-signin">
+  <h2 class="mb-3 fw-bolder">User Registration </h1>
+
   <div class="mb-3">
-    <input name="email" type="email" id="email" class="form-control" placeholder="Email" required>
+    <input name="name" type="name" id="name" class="form-control" placeholder="Name" value="<?php echo (!empty($_POST['name'])) ? $_POST['name'] : '' ;?>" required>
+    <strong id="nameMsg" class="text-danger errorMsg my-2 fw-bolder"></strong>
+  </div>
+
+  <div class="mb-3">
+    <input name="email" type="email" id="email" class="form-control" placeholder="Email" value="<?php echo (!empty($_POST['email'])) ? $_POST['email'] : '' ;?>" required>
     <strong id="emailMsg" class="text-danger errorMsg my-2 fw-bolder"></strong>
+  </div>
+
+
+  <div class="mb-3">
+    <input name="phone" type="phone" id="phone" class="form-control" placeholder="phone" value="<?php echo (!empty($_POST['phone'])) ? $_POST['phone'] : '' ;?>" required>
+    <strong id="phoneMsg" class="text-danger errorMsg my-2 fw-bolder"></strong>
   </div>
 
   <div class="text-end">
     <span class="text-motobase user-select-none" id="eye"></span>
   </div>
-  <div class="mb-3">      
-  <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+  <div class="mb-3">  
+  <input type="password" name="password" id="password" class="form-control" placeholder="Password" value="<?php echo (!empty($_POST['password'])) ? $_POST['password'] : '' ;?>" required>
   <strong id="passwordMsg" class="text-danger errorMsg my-2 fw-bolder"></strong>
   </div>
 
-  <button class="btn btn-lg btn-motobase btn-block" id="btn-login" name="btn-login" type="login">Sign in</button>
 
-  <p class="mt-3">Don't Have an account? <a href="<?php echo route('register/customer');?>">Register Now</a></p>
+  <button class="btn btn-lg btn-motobase btn-block" id="btn-register" name="btn-register" type="register">Register</button>
+
+  <p class="mt-3">Already Have an account? <a href="<?php echo route('login');?>">Login Now</a></p>
 </form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
 
 <script>
     
+      let nameError = true;
       let emailError = true;
+      let phoneError = true;
       let passwordError = true;
 
+      let name = document.querySelector("#name");
       let email = document.querySelector("#email");
+      let phone = document.querySelector("#phone");
       let password = document.querySelector("#password");
-      checkErrors();
 
+      let emails = []
       
+      <?php
+        foreach($emails as $email){
+          echo "emails.push('".md5($email['email'])."')\n";
+        }
+      ?>
       let eye = document.querySelector('#eye')
       eye.innerHTML = '<i class="bi bi-eye-fill"></i> Show Password'
       eye.addEventListener('click', passwordToggle)
@@ -117,8 +141,80 @@ body {
           eye.innerHTML = '<i class="bi bi-eye-fill"></i> Show Password'
         }
       }
-    
+
+      checkErrors();
+
       
+      function validateName() {
+        let nameValue = name.value
+        let nameMsg = document.querySelector("#nameMsg")
+        if (nameValue == "") {
+          nameError = true
+          checkErrors()
+          nameMsg.innerText = "Name can't be empty"
+          name.classList.add("is-invalid")
+        }else if(nameValue.length <= 5){
+          nameError = true
+          checkErrors()
+          nameMsg.innerText = "Name can't be less than 6 Characters"
+          name.classList.add("is-invalid")
+        }else {
+          nameError = false
+          checkErrors()
+          name.classList.remove("is-invalid")
+          name.classList.add("is-valid")
+          nameMsg.innerText = ""
+        }
+      }
+
+      name.addEventListener("focusout", function () {
+        validateName()
+      })
+      name.addEventListener("keyup", function () {
+        validateName()
+      })
+
+      function validateMobile(mobilenumber) {
+        var regmm = "^([6-9][0-9]{9})$";
+        var regmob = new RegExp(regmm);
+        if (regmob.test(mobilenumber)) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      function validatephone() {
+        let phoneValue = phone.value.trim();
+        let phoneMsg = document.querySelector("#phoneMsg")
+        if (phone.value.trim() == "") {
+          phoneError = true;
+          checkErrors();
+          phoneMsg.innerText = "Mobile number can't be empty";
+          phone.classList.add("is-invalid");
+        }
+        else if (!validateMobile(phoneValue)) {
+          phoneError = true;
+          checkErrors();
+          phoneMsg.innerText =
+            "Mobile number is invalid (10 digits only)";
+          phone.classList.add("is-invalid");
+        } else {
+          phoneError = false;
+          checkErrors();
+          phone.classList.remove("is-invalid");
+          phone.classList.add("is-valid");
+          phoneMsg.innerText = "";
+        }
+      }
+
+      phone.addEventListener("focusout", function () {
+        validatephone();
+      });
+      phone.addEventListener("keyup", function () {
+        validatephone();
+      });
+
       function checkEmailPattern(email) {
         const re =
           /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -126,12 +222,18 @@ body {
       }
 
       function validateEmail() {
-        let emailValue = email.value.trim()
+        let emailValue = email.value.trim().toLowerCase()
+        console.log(CryptoJS.MD5(emailValue))
         let emailMsg = document.querySelector("#emailMsg")
         if (emailValue == "") {
           emailError = true
           checkErrors()
           emailMsg.innerText = "Email can't be empty"
+          email.classList.add("is-invalid")
+        }else if (emails.includes(CryptoJS.MD5(emailValue).toString())) {
+          emailError = true
+          checkErrors()
+          emailMsg.innerText = "Email already in use"
           email.classList.add("is-invalid")
         } else if (!checkEmailPattern(emailValue)) {
           emailError = true
@@ -206,13 +308,20 @@ body {
 
 
       function checkErrors() {
-        errors = emailError +passwordError
+        errors = nameError + emailError +passwordError
         if (errors) {
-          document.querySelector("#btn-login").disabled = true;
+          document.querySelector("#btn-register").disabled = true;
         } else {
-          document.querySelector("#btn-login").disabled = false;
+          document.querySelector("#btn-register").disabled = false;
         }
       }
+
+
+      <?php if($register['error']) {?>
+        validateName()
+        validateEmail()          
+        validatePassword()
+      <?php }?>
 
 </script>
 </body>

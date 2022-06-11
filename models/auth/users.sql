@@ -2,7 +2,7 @@ CREATE TABLE users (
     name varchar(255) NOT NULL,
     email varchar(255) NOT NULL,
     password varchar(255) NOT NULL,
-    role ENUM ('user','moderator','admin') DEFAULT 'user',
-    status int DEFAULT 0,
+    role ENUM ('admin','host','customer') DEFAULT 'customer',
+    status ENUM ('active','inactive') DEFAULT 'inactive',
     PRIMARY KEY (email)
 );

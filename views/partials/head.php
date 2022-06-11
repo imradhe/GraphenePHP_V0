@@ -8,7 +8,7 @@
     <meta name="robots" content="follow"/>
     <link rel="canonical" href="<?php echo url();?>" />
 
-    <link rel=icon sizes=192x192 href="<?php echo home().$config['APP_ICON']; ?>" />
+    <link rel="icon" size="500x500" href="<?php echo home().$config['APP_ICON']; ?>" />
     <meta name="theme-color" content="<?php echo $config['APP_THEME_COLOR']; ?>" />
 
      <!-- OPEN GRAPH -->
@@ -36,11 +36,11 @@
 
     
     <!-- Bootstrap core CSS -->
-    <link href="<?php assets("bootstrap/css/bootstrap.min.css");?>" rel="stylesheet">
-    <script src="<?php assets("bootstrap/js/bootstrap.bundle.min.js");?>"></script>
+    <link href="<?php echo assets("bootstrap/css/bootstrap.min.css");?>" rel="stylesheet">
+    <script src="<?php echo assets("bootstrap/js/bootstrap.bundle.min.js");?>"></script>
 
     <!-- Jquery -->
-    <script src="<?php assets("jquery/jquery.min.js");?>"></script>
+    <script src="<?php echo assets("jquery/jquery.min.js");?>"></script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,9 +50,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">    
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="<?php assets("css/app.css");?>">
+    <link rel="stylesheet" href="<?php echo assets("css/app.css");?>">
 
     <title><?php echo $config['APP_TITLE']; ?></title>
+
 </head>
 
 

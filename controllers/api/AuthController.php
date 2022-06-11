@@ -14,38 +14,12 @@ class Auth
     public function __construct(){
         // Require Database
         require('db.php');
+        header("Content-Type:Application/JSON");
 
         // Database Instantiation
         $this->db = new mysqli($config['DB_HOST'],$config['DB_USERNAME'], $config['DB_PASSWORD'], $config['DB_DATABASE']);
 
-        $this->errors = "";
-
-        // Redirect if session is invalid
-        if($this->checkSession()){
-
-            if($this->currentLog['ip'] != getIP()) 
-            
-            redirectIfLocked(); 
-
-        }
-        
-        else redirectIfLocked();
-    }
-
-
-    // Check the session validity
-    public function checkSession(){
-        $this->loginID = $_COOKIE['auth'];
-
-        $query = mysqli_num_rows($this->db->query("SELECT * from logs where loginID='$this->loginID' and loggedout=0"));
-
-        if($query){
-            $this->currentLog = mysqli_fetch_assoc($this->db->query("SELECT * from logs where loginID='$this->loginID' and loggedout=0"));
-            return $this->currentLog;
-        }
-
-        else return false;
-
+        $this->errors = [];
     }
     
 
@@ -56,7 +30,7 @@ class Auth
         $this->password = mysqli_real_escape_string($this->db, $password);
 
 
-        $loginQuery = mysqli_fetch_assoc($this->db->query("SELECT * from users where email='$this->email'"));
+        $loginQuery = mysqli_fetch_assoc($this->db->query("SELECT * from users where email='$this->email' and status='active'"));
 
         // Check if user exists
         if($loginQuery){
@@ -66,9 +40,8 @@ class Auth
 
 
                 $this->loginID = md5($this->email.$this->password.time());
-                // Set Cookie
-                setcookie("auth", $this->loginID, time() + (86400 * 365), "/");
-    
+
+                
                 $this->ip = getDevice()['ip'];
                 $this->os = getDevice()['os'];
                 $this->browser = getDevice()['browser'];
@@ -77,8 +50,8 @@ class Auth
                 $insertLog = $this->db->query("INSERT INTO logs (`loginID`, `email`, `ip`, `browser`, `os`) VALUES ('$this->loginID','$this->email','$this->ip','$this->browser','$this->os')");
     
                 if($insertLog){
-                    if(!empty($_GET['back'])) header("Location:".$_GET['back']);
-                    else header("Location:".home());
+                    
+                    $this->errors = null;
                 }
                 else{
                     $this->errors = "Internal Server Error";
@@ -90,6 +63,21 @@ class Auth
         }
         else{
             $this->errors = "User Not Found";
+        }
+
+        if(empty($this->errors)){
+            return json_encode([ 
+                'loginID' => $this->loginID,
+                'message'=> 'Authentication Successful',
+                'status' => 200
+            ]);
+        }else{            
+            header("HTTP/1.1 401 Unauthorized");
+            return json_encode([ 
+                'errors' => $this->errors,
+                'message'=> 'Authentication Failed',
+                'status' => 401
+            ]);            
         }
     }
 
