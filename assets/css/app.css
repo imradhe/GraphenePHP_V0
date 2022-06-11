@@ -2,15 +2,88 @@
     font-family: Graphene;
     src: url(../fonts/Graphene.otf) format("truetype");
 }
-
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css");
 * {
-    font-family: Graphene !important;
+    font-family: sans-serif !important;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
+body{
+    overflow-x: hidden !important;
+}
 .btn:focus {
     outline: none !important;
     box-shadow: none !important;
 }
+
+#app {
+        margin-top: 8vh;
+        max-height: 100vh !important;
+    }
+    img{
+        user-select: none !important;
+        pointer-events:none !important;
+    }
+    #app img {
+        max-height: 40vh;
+    }
+
+    .text-motobase{
+        color: rgb(72, 149, 192) !important;
+    }
+
+    .bg-motobase{
+        background-color: rgb(72, 149, 192) !important;
+    }
+    .btn-motobase {
+        user-select: none !important;
+        font-weight: bolder;
+        letter-spacing: 1px;
+        padding: 8px 28px;
+        border-radius: 50px;
+        transition: 0.5s;
+        margin: 10px;
+        background-color: rgb(72, 149, 192);
+        color: #fff;
+        border: 2px solid rgb(72, 149, 192);
+    }
+
+    
+    .btn-motobase:hover,
+    .btn-motobase:active,
+    .btn-motobase:focus {
+        background-color: rgba(72, 149, 192, .3);
+        border: 2px solid rgb(72, 149, 192);
+        color: rgb(72, 149, 192);
+    }
+
+
+    .btn-outline-motobase{
+        user-select: none !important;
+        font-weight: bolder;
+        letter-spacing: 1px;
+        padding: 8px 28px;
+        border-radius: 50px;
+        transition: 0.5s;
+        margin: 10px;
+        color: rgb(72, 149, 192);
+        border: 2px solid rgb(72, 149, 192); 
+    }
+    
+
+
+    .btn-outline-motobase:hover,
+    .btn-outline-motobase:active,
+    .btn-outline-motobase:focus {
+        background-color: rgb(72, 149, 192);
+        border: 2px solid rgb(72, 149, 192);
+        color: #fff;
+    }
+    
+    .navbar *{
+        user-select: none !important;
+    }
+    .user-select-none{
+        user-select: none !important;
+    }
