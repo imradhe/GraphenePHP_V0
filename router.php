@@ -16,6 +16,7 @@ class Router
     }
 
 
+
     public function addRoute(string $uri, string $path) : void
     { 
         $uri = explode('?',$uri)[0];
@@ -56,5 +57,7 @@ class Router
         }
 
     }
+    
+    
 
 }
